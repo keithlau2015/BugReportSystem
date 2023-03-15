@@ -1,25 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Script\\c#\\BugReportSystem\\BugReportSystem.csproj": {}
+    "C:\\Users\\Keith\\Documents\\NullPointInteractive\\Game\\System\\BugReportSystem\\BugReportSystem\\BugReportSystem.csproj": {}
   },
   "projects": {
-    "E:\\Script\\c#\\BugReportSystem\\BugReportSystem.csproj": {
+    "C:\\Users\\Keith\\Documents\\NullPointInteractive\\Game\\System\\BugReportSystem\\BugReportSystem\\BugReportSystem.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Script\\c#\\BugReportSystem\\BugReportSystem.csproj",
+        "projectUniqueName": "C:\\Users\\Keith\\Documents\\NullPointInteractive\\Game\\System\\BugReportSystem\\BugReportSystem\\BugReportSystem.csproj",
         "projectName": "BugReportSystem",
-        "projectPath": "E:\\Script\\c#\\BugReportSystem\\BugReportSystem.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "E:\\Script\\c#\\BugReportSystem\\obj\\",
+        "projectPath": "C:\\Users\\Keith\\Documents\\NullPointInteractive\\Game\\System\\BugReportSystem\\BugReportSystem\\BugReportSystem.csproj",
+        "packagesPath": "C:\\Users\\Keith\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Keith\\Documents\\NullPointInteractive\\Game\\System\\BugReportSystem\\BugReportSystem\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Keith\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -37,12 +43,6 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
-          "dependencies": {
-            "Newtonsoft.Json": {
-              "target": "Package",
-              "version": "[13.0.3, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",
