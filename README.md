@@ -5,7 +5,7 @@ A Bug Report System integrate with other plateform(currently Im using this proje
 [Download dll](), and import into your project
 
 ### How to use Bug Report
-Below is a simple code sample
+Below is a simple code sample usecase
 ```c#
 using BugReportSystem;
 
