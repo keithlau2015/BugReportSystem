@@ -1,0 +1,12 @@
+E:\script\BugReportSystem\BugReportSystem\obj\Debug\net7.0\BugReportSystem.csproj.AssemblyReference.cache
+E:\script\BugReportSystem\BugReportSystem\obj\Debug\net7.0\BugReportSystem.GeneratedMSBuildEditorConfig.editorconfig
+E:\script\BugReportSystem\BugReportSystem\obj\Debug\net7.0\BugReportSystem.AssemblyInfoInputs.cache
+E:\script\BugReportSystem\BugReportSystem\obj\Debug\net7.0\BugReportSystem.AssemblyInfo.cs
+E:\script\BugReportSystem\BugReportSystem\obj\Debug\net7.0\BugReportSystem.csproj.CoreCompileInputs.cache
+E:\script\BugReportSystem\BugReportSystem\bin\Debug\net7.0\BugReportSystem.deps.json
+E:\script\BugReportSystem\BugReportSystem\bin\Debug\net7.0\BugReportSystem.dll
+E:\script\BugReportSystem\BugReportSystem\bin\Debug\net7.0\BugReportSystem.pdb
+E:\script\BugReportSystem\BugReportSystem\obj\Debug\net7.0\BugReportSystem.dll
+E:\script\BugReportSystem\BugReportSystem\obj\Debug\net7.0\refint\BugReportSystem.dll
+E:\script\BugReportSystem\BugReportSystem\obj\Debug\net7.0\BugReportSystem.pdb
+E:\script\BugReportSystem\BugReportSystem\obj\Debug\net7.0\ref\BugReportSystem.dll
