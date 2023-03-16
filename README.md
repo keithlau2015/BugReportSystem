@@ -38,6 +38,9 @@ public class Program{
     }
 }
 ```
+![Trello List](image/sample_result.jpg)
+![Trello Card](image/sample_result_2.jpg)
+There you go!
 
 ### Currently Support Plateform
 1. Trello
