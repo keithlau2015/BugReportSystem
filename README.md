@@ -2,7 +2,7 @@
 A Bug Report System integrate with other plateform(currently Im using this project on my games, so )
 
 ## Getting Started
-[Download dll](), and import into your project
+[Download dll](https://github.com/keithlau2015/BugReportSystem/blob/main/BugReportSystem/bin/Debug/net7.0/BugReportSystem.dll), and import into your project
 
 ### How to use Bug Report
 Below is a simple code sample usecase
