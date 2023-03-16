@@ -7,6 +7,7 @@ using System.Text.Json.Nodes;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Globalization;
+using System.Text;
 
 internal class TrelloReporter : IReporter
 {
@@ -30,7 +31,7 @@ internal class TrelloReporter : IReporter
     private string getAllListApi = "https://api.trello.com/1/boards/{0}/lists?&key={1}&token={2}";
 
     private string createListApi = "https://api.trello.com/1/lists?name={0}&idBoard={1}&key={2}&token={3}";
-    private string createCardApi = "https://api.trello.com/1/cards?idList={0}&key={1}&token={2}";
+    private string createCardApi = "https://api.trello.com/1/cards?idList={0}&pos=top&key={1}&token={2}";
 
     private string delCardApi = "https://api.trello.com/1/cards/{0}?key={1}&token={2}";
 
@@ -125,7 +126,7 @@ internal class TrelloReporter : IReporter
         try
         {
             HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Post, string.Format(createCardApi, this.listID, API_KEY, API_TOKEN));
-            string data = "{\"name\": \"" + bugReport.title + "\", \"desc\": \"System Info:\\n" + bugReport.sysInfo + "\\nSummary:" + bugReport.summary + "\\nSend Time:\\n" + bugReport.sendTime.ToString("G", CultureInfo.GetCultureInfo("de-DE")) + "\"}";
+            string data = "{\"name\": \"" + bugReport.title + "\", \"desc\": \"System Info:\\n" + bugReport.sysInfo + "\\nSummary:\\n" + bugReport.summary + "\\nSend Time:\\n" + bugReport.sendTime.ToString("G", CultureInfo.GetCultureInfo("de-DE")) + "\"}";
             requestMessage.Content = new StringContent(data, System.Text.Encoding.UTF8, "application/json");
             HttpResponseMessage responseMessage = await client.SendAsync(requestMessage);
             if (responseMessage.IsSuccessStatusCode){
@@ -140,9 +141,19 @@ internal class TrelloReporter : IReporter
 
                 //update with a screenshot
                 HttpRequestMessage updateRequestMessage = new HttpRequestMessage(HttpMethod.Post, string.Format(updateCardApi, this.lastCardID, API_KEY, API_TOKEN));
-                HttpContent requestContent = new ByteArrayContent(bugReport.attachment);
-                requestContent.Headers.ContentType = MediaTypeHeaderValue.Parse("application/octet-stream");
-                updateRequestMessage.Content = requestContent;
+                MultipartFormDataContent content = new MultipartFormDataContent();
+                // Add the attachment file to the content
+                ByteArrayContent fileContent = new ByteArrayContent(bugReport.attachment);
+                fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse("image/jpeg"); // Replace "image/jpeg" with the appropriate MIME type for your image file
+                content.Add(fileContent, "file", "attachment-name.jpg"); // Replace "attachment-name.jpg" with the name of your attachment file
+
+                // Add the other parameters to the content
+                StringContent mimeTypeContent = new StringContent("image/jpeg"); // Replace "image/jpeg" with the appropriate MIME type for your image file
+                content.Add(mimeTypeContent, "mimeType");
+
+                // Set the content of the request message
+                updateRequestMessage.Content = content;
+
                 HttpResponseMessage updateResponseMessage = await client.SendAsync(updateRequestMessage);
                 if(updateResponseMessage.IsSuccessStatusCode)
                     return true;
