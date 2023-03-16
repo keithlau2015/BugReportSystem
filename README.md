@@ -38,8 +38,8 @@ public class Program{
     }
 }
 ```
-![Trello List](image/sample_result.jpg)
-![Trello Card](image/sample_result_2.jpg)
+![Trello List](image/sample_result.png)
+![Trello Card](image/sample_result_2.png)
 There you go!
 
 ### Currently Support Plateform
