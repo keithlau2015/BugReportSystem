@@ -12,6 +12,7 @@ public class BugReport
         /// DEFAULT_LIST_NAME
         /// </summary>
         Trello = 0,
+        Notion = 1,
     }
 
     public struct BugReportParam
