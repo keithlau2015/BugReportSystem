@@ -1,13 +1,12 @@
-﻿namespace BugReportSystem;
+﻿using System.Linq;
+namespace BugReportSystem;
 
 using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text.Json.Nodes;
-using System.Text.Json;
 using System.Threading.Tasks;
 using System.Globalization;
-using System.Text;
+using Newtonsoft.Json.Linq;
 
 internal class TrelloReporter : IReporter
 {
@@ -55,10 +54,10 @@ internal class TrelloReporter : IReporter
             Console.WriteLine(responseMessage.StatusCode);
             if(responseMessage.IsSuccessStatusCode) {
                 string responseBody = await responseMessage.Content.ReadAsStringAsync();
-                JsonNode json = JsonNode.Parse(responseBody);
+                JObject json = JObject.Parse(responseBody);
                 if(json == null) return false;
-                cardMaxLimit = json["limits"]["cards"]["openPerList"]["warnAt"].AsValue().GetValue<int>();
-                boardID = json["id"].AsValue().GetValue<string>();
+                cardMaxLimit = json["limits"]["cards"]["openPerList"]["warnAt"].Value<int>();
+                boardID = json["id"].Value<string>();
                 Console.WriteLine("cardMaxLimit: " + cardMaxLimit);
                 Console.WriteLine("boardID: " + boardID);
                 return true;
@@ -69,14 +68,14 @@ internal class TrelloReporter : IReporter
         }
     }
 
-    private async Task<JsonNode> GetAllCards() {
+    private async Task<JArray> GetAllCards() {
         Console.WriteLine("Get All Cards");
         try{
             HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Get, string.Format(getAllCardsApi, this.listID, API_KEY, API_TOKEN));
             HttpResponseMessage responseMessage = await client.SendAsync(requestMessage);
             if(responseMessage.IsSuccessStatusCode) {
                 string responseBody = await responseMessage.Content.ReadAsStringAsync();
-                return JsonNode.Parse(responseBody);
+                return JArray.Parse(responseBody);
             }
             return null;
         }catch(Exception e){
@@ -84,14 +83,14 @@ internal class TrelloReporter : IReporter
         }
     }
 
-    private async Task<JsonNode> GetAllLists() {
+    private async Task<JArray> GetAllLists() {
         Console.WriteLine("Get All Lists");
         try{
             HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Get, string.Format(getAllListApi, this.boardID, API_KEY, API_TOKEN));
             HttpResponseMessage responseMessage = await client.SendAsync(requestMessage);
             if(responseMessage.IsSuccessStatusCode) {
                 string responseBody = await responseMessage.Content.ReadAsStringAsync();
-                return JsonNode.Parse(responseBody);
+                return JArray.Parse(responseBody);
             }
             return null;
         }catch(Exception e){
@@ -107,9 +106,9 @@ internal class TrelloReporter : IReporter
             HttpResponseMessage responseMessage = await client.SendAsync(requestMessage);
             if (responseMessage.IsSuccessStatusCode) {
                 string responseBody = await responseMessage.Content.ReadAsStringAsync();
-                JsonNode json = JsonNode.Parse(responseBody);
+                JObject json = JObject.Parse(responseBody);
                 if(json == null) return false;
-                listID = json["id"].AsValue().GetValue<string>();
+                listID = json["id"].Value<string>();
                 return true;
             }
             else
@@ -135,9 +134,9 @@ internal class TrelloReporter : IReporter
                     return true;
                 
                 string responseBody = await responseMessage.Content.ReadAsStringAsync();
-                JsonNode json = JsonNode.Parse(responseBody);
+                JObject json = JObject.Parse(responseBody);
                 if(json == null) return false;
-                lastCardID = json["id"].AsValue().GetValue<string>();
+                lastCardID = json["id"].Value<string>();
 
                 //update with a screenshot
                 HttpRequestMessage updateRequestMessage = new HttpRequestMessage(HttpMethod.Post, string.Format(updateCardApi, this.lastCardID, API_KEY, API_TOKEN));
@@ -198,15 +197,15 @@ internal class TrelloReporter : IReporter
             return false;
         }
 
-        JsonNode listsJson = await GetAllLists();
-        foreach (JsonNode json in listsJson.AsArray())
+        JArray listsJson = await GetAllLists();
+        foreach (JObject json in listsJson)
         {
-            if (json["name"].AsValue().GetValue<string>().Equals(DEFAULT_LIST_NAME))
+            if (json["name"].Value<string>().Equals(DEFAULT_LIST_NAME))
             {
-                listID = json["id"].AsValue().GetValue<string>();
+                listID = json["id"].Value<string>();
                 break;
             }
-        }
+        }      
 
         if (listID == "") {
             if (!await CreateBugReportList()) {
@@ -215,15 +214,15 @@ internal class TrelloReporter : IReporter
             }
         }
 
-        JsonNode cardsJson = await GetAllCards();
+        JArray cardsJson = await GetAllCards();
         if (cardMaxLimit == -1){
             Console.WriteLine("cardMaxLimit == -1");
             return false;
         }
 
-        if(cardsJson != null && cardMaxLimit <= cardsJson.AsArray().Count)
+        if(cardsJson != null && cardMaxLimit <= cardsJson.Values().Count())
         {
-            lastCardID = cardsJson.AsArray()[cardsJson.AsArray().Count - 1]["id"].AsValue().GetValue<string>();
+            lastCardID = cardsJson.Values()[cardsJson.Values().Count() - 1]["id"].Value<string>();
             if(!await DeleteBugReportCard()){
                 Console.WriteLine("DeleteBugReportCard error");
                 return false;

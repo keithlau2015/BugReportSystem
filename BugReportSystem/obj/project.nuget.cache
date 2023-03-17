@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "dPQxmkVD88lApJf55KwMTTj9f1yd3xsNoFrkRkOeW7xzKfyCvuDx2E4sGeFQ54dqkPPMWB1FhgCLNmTvMRfzeg==",
+  "dgSpecHash": "rgc4iwXXKgA82PpgbjQQLaLUaejYROq9HhGQPFm9+ZssRVQ/vtOEpLetSzYEn640FJPGnQSx1JgPlfpN5o8puw==",
   "success": true,
   "projectFilePath": "E:\\script\\BugReportSystem\\BugReportSystem\\BugReportSystem.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\User\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
   "logs": []
 }
