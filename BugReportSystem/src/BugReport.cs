@@ -20,9 +20,6 @@ public class BugReport
         public SupportItemIndex index;
         public bool isActive;
         public Dictionary<string, string> parameters;
-        public BugReportParam(){
-            this.parameters = new Dictionary<string, string>();
-        }
     }
     
     public string title;
@@ -34,27 +31,34 @@ public class BugReport
     /// <summary>
     /// contain all supported ways to send bug report
     /// </summary>
-    public Dictionary<SupportItemIndex, BugReportParam> allItems { get; private set; }= new Dictionary<SupportItemIndex, BugReportParam>();
-
-    public BugReport(Dictionary<SupportItemIndex, bool> activation){        
-        #region Trello
-        BugReportParam trelloParam = new BugReportParam();
-        trelloParam.index = SupportItemIndex.Trello;
-        trelloParam.isActive = true;
-        trelloParam.parameters.Add("API_KEY", "YOUR API_KEY");
-        trelloParam.parameters.Add("API_TOKEN", "YOUR API_TOKEN");
-        trelloParam.parameters.Add("BOARD_NAME", "YOUR BOARD ID");
-        trelloParam.parameters.Add("DEFAULT_LIST_NAME", "YOUR LIST NAME");
-        allItems.Add(trelloParam.index, trelloParam);
-        #endregion
-
-        foreach (KeyValuePair<SupportItemIndex, bool> item in activation)
+    public Dictionary<SupportItemIndex, BugReportParam> allItems { get; private set; } = new Dictionary<SupportItemIndex, BugReportParam>(){
         {
-            BugReportParam bugReportParam;
-            if(allItems.TryGetValue(item.Key, out bugReportParam))
-                bugReportParam.isActive = item.Value;
+            SupportItemIndex.Trello, 
+            new BugReportParam(){ 
+                index = SupportItemIndex.Trello,
+                isActive = true,
+                parameters = new Dictionary<string, string>(){
+                    {"API_KEY", "YOUR API_KEY"},
+                    {"API_TOKEN", "YOUR API_TOKEN"},
+                    {"BOARD_NAME", "YOUR BOARD ID"},
+                    {"DEFAULT_LIST_NAME", "YOUR LIST NAME"}
+                }
+            }
+        },
+        {
+            SupportItemIndex.Notion,
+            new BugReportParam(){
+                index = SupportItemIndex.Notion,
+                isActive = true,
+                parameters = new Dictionary<string, string>(){
+                    {"API_KEY", "YOUR API_KEY"},
+                    {"API_TOKEN", "YOUR API_TOKEN"},
+                    {"BOARD_NAME", "YOUR BOARD ID"},
+                    {"DEFAULT_LIST_NAME", "YOUR LIST NAME"}
+                }
+            }
         }
-    }
+    };
 
     /// <summary>
     /// Send Report to all supported ways
@@ -64,7 +68,13 @@ public class BugReport
         foreach (var item in allItems.Values)
         {
             if(!item.isActive) continue;
-            IReporter reporter = new TrelloReporter(item.parameters);
+            
+            IReporter reporter = null;
+            if(item.index == SupportItemIndex.Trello)
+                reporter = new TrelloReporter(item.parameters);                
+            if(reporter == null)
+                return false;
+            
             result = await reporter.SendReport(this);
         }
         return result;
