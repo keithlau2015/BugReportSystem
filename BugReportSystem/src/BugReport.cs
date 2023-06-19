@@ -38,23 +38,10 @@ public class BugReport
                 index = SupportItemIndex.Trello,
                 isActive = true,
                 parameters = new Dictionary<string, string>(){
-                    {"API_KEY", "YOUR API_KEY"},
-                    {"API_TOKEN", "YOUR API_TOKEN"},
-                    {"BOARD_NAME", "YOUR BOARD ID"},
-                    {"DEFAULT_LIST_NAME", "YOUR LIST NAME"}
-                }
-            }
-        },
-        {
-            SupportItemIndex.Notion,
-            new BugReportParam(){
-                index = SupportItemIndex.Notion,
-                isActive = true,
-                parameters = new Dictionary<string, string>(){
-                    {"API_KEY", "YOUR API_KEY"},
-                    {"API_TOKEN", "YOUR API_TOKEN"},
-                    {"BOARD_NAME", "YOUR BOARD ID"},
-                    {"DEFAULT_LIST_NAME", "YOUR LIST NAME"}
+                    {"API_KEY", ""},
+                    {"API_TOKEN", ""},
+                    {"BOARD_NAME", ""},
+                    {"DEFAULT_LIST_NAME", ""}
                 }
             }
         }

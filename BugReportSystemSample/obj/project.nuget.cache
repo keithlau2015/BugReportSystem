@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "5OO6cU69F5AkFAWldB+anlULSMBGjziVxDpTBCOMEfsp8dHeo9rLXB6IROOAepv5Gu5o3//uLlihT8V2qP/ZWQ==",
+  "success": true,
+  "projectFilePath": "E:\\script\\BugReportSystem\\BugReportSystemSample\\BugReportSystemSample.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\User\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
