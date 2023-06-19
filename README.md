@@ -5,9 +5,13 @@ A Bug Report System integrate with other plateform(currently Im using this proje
 [Download dll](https://github.com/keithlau2015/BugReportSystem/raw/main/BugReportSystem/bin/Debug/net7.0/BugReportSystem.dll), and import into your project
 
 ### How to use Bug Report
-BugReportSystemSample Project is a exmaple how to apply and use the BugReportSystem with dll
+Below is a simple code sample usecase 
 
-Below is a simple code sample usecase
+Trello API & TOKEN link: [https://trello.com/app-key]
+* `YOUR_TRELLO_API_KEY` is your trello api key </br>
+* `YOUR_TRELLO_API_TOKEN` is your trello api token </br>
+* `YOUR_TRELLO_BOARD_NAME` is your trello board ID, which you can find it at your board url which looks like this: `https://trello.com/b/YOUR_TRELLO_BOARD_ID/YOUR_BOARD_NAME` </br>
+* `YOUR_TRELLO_DEFAULT_LIST_NAME` is your trello board list name
 ```c#
 using BugReportSystem;
 
@@ -42,7 +46,10 @@ public class Program{
 ```
 ![Trello List](image/sample_result.png)
 ![Trello Card](image/sample_result_2.png)
+
 There you go!
+
+Also you may reference `BugReportSystemSample` C# console project to how you apply and use the BugReportSystem
 
 ### Currently Support Plateform
 1. Trello
