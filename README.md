@@ -1,5 +1,5 @@
 ## Bug Report System
-A Bug Report System integrate with other plateform(currently Im using this project on my games, so )
+A Bug Report System integrate with other plateform(currently Im using this project on my games)
 
 ## Getting Started
 [Download dll](https://github.com/keithlau2015/BugReportSystem/raw/main/BugReportSystem/bin/Debug/net7.0/BugReportSystem.dll), and import into your project
@@ -52,7 +52,9 @@ There you go!
 Also you may reference `BugReportSystemSample` C# console project to how you apply and use the BugReportSystem
 
 ### Currently Support Plateform
-1. Trello
+| Support Platform  | Status |
+| ----------------- | ------ |
+| Trello  | ✅ |
 
 ## Contributing
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
